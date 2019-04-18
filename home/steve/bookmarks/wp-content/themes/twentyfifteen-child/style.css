@@ -1,0 +1,51 @@
+/*
+ Theme Name:   Twenty Fifteen Child Theme
+ Description:  A child theme of the Twenty Fifteen default WordPress theme
+ Author:       Steve Ward
+ Template:     twentyfifteen
+ Version:      1.0.0
+*/
+
+@import url("../twentyfifteen/style.css");
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
+
+/* Headings */
+@import url(https://fonts.googleapis.com/css?family=Oxygen:400,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+@import url(https://fonts.googleapis.com/css?family=Bitter:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Dosis:400,700);
+@import url(https://fonts.googleapis.com/css?family=Cantarell:400,700,400italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Cabin+Sketch);
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://fonts.googleapis.com/css?family=Work+Sans);
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
+
+/* Code */
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700);
+
+body {
+	font-family: "Noto Sans";
+}
+
+.bookmark-title, .bookmark-link {
+	color: red;
+	font-weight: normal;
+}
+
+.post_format-post-format-link.hentry {
+	padding-top: 3%;
+}
+
+.post_format-post-format-link .entry-content {
+	display: none;
+}
+
+.page-title {
+	font-family: 'Noto Sans';
+}
+
+h2.entry-title {
+	font-family: 'Work Sans';
+}

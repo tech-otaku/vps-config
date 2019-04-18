@@ -1,0 +1,6 @@
+# Used by /Users/steve/Dropbox/Digital Ocean/local/shares-mount.sh and /Users/steve/Dropbox/Digital Ocean/local/shares-unmount.sh scripts.
+# Blank lines or lines beginning with `#` are ignored by these scripts.
+
+# File System, Protocol, Bonjour Name, NetBIOS Name, IP Address, Computer Name, Volume, Mount Point
+smbfs,smb,Some-Very-Long-Local-Hostname.local,someverhostname,192.168.1.75,My Computer Name,steve,steves-macbook-pro
+afp,afp,Steves-iMac-27-5K.local,StevesiMac275K,192.168.1.10,Steve’s iMac 27" 5K,steve,steves-imac-27-5k
