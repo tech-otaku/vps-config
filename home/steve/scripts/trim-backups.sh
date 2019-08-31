@@ -13,3 +13,6 @@
 # if there are more than 7 files whose name matches `steveward*` in the `/home/steve/site-backups` directory then delete all but the latest 7 files
 [ $(find /home/steve/site-backups -maxdepth 1 -name "steveward*" | wc -l) -gt 7 ] && ls  /home/steve/site-backups/steveward* -t | tail -n +8 | xargs rm --
 
+# if there are more than 7 files whose name matches `letsencrypt_*` in the `/home/steve/letsencrypt-backups` directory then delete all but the latest 7 files
+[ $(find /home/steve/letsencrypt-backups -maxdepth 1 -name "letsencrypt_*" | wc -l) -gt 7 ] && ls  /home/steve/letsencrypt-backups/letsencrypt_* -t | tail -n +8 | xargs rm --
+

@@ -353,14 +353,17 @@ fi
 cat > $DIRECTORY/.htaccess <<HEREDOC
 # STOP APACHE FROM SERVING WP-CONFIG.PHP - [Added by $0]
 <files wp-config.php>
-	Order Deny,Allow
-	Deny from all
+	Require all denied
 </files>
 
 # STOP APACHE FROM SERVING .HT* FILES - [Added by $0]
 <Files ~ "^\.ht">
-	Order Deny,Allow
-	Deny from all
+	Require all denied
+</Files>
+
+# PROTECT .USER.INI - [Added by $0]
+<Files .user.ini>
+    Require all denied
 </Files>
 	
 # BLOCK THE INCLUDE-ONLY FILES - [Added by $0]
@@ -428,7 +431,7 @@ else
     F=".htdbm"
 fi
 
-sudo cp -r /home/steve/templates/.htpasswds/$F /var/www/$1/$F
+sudo cp -r /home/steve/.htpasswds/$F /var/www/$1/$F
 sudo chown steve:$group /var/www/$1/$F
 chmod $fperm /var/www/$1/$F
 

@@ -3,7 +3,7 @@
 
 # USAGE: bash /home/steve/templates/create-http-auth-passwords.sh <text|database>
 
-FILEPATH="/home/steve/templates/.htpasswds"
+FILEPATH="/home/steve/.htpasswds"
 
 if [ ! -d "$FILEPATH" ]
 then

@@ -349,7 +349,8 @@ sudo perl -pi -e "s/database_name_here/$dbname/g" $DOCUMENT_ROOT/wp-config.php
 sudo perl -pi -e "s/username_here/$dbuser/g" $DOCUMENT_ROOT/wp-config.php
 sudo perl -pi -e "s/password_here/$dbpass/g" $DOCUMENT_ROOT/wp-config.php
 sudo perl -pi -e "s/localhost/$dbhost/g" $DOCUMENT_ROOT/wp-config.php
-sudo perl -pi -e "s/table_prefix  = 'wp_'/table_prefix  = '$tprefix'"/g $DOCUMENT_ROOT/wp-config.php
+#sudo perl -pi -e "s/table_prefix  = 'wp_'/table_prefix  = '$tprefix'"/g $DOCUMENT_ROOT/wp-config.php
+sudo perl -pi -e "s/'wp_'/'$tprefix'"/g $DOCUMENT_ROOT/wp-config.php
 sudo perl -pi -e "s/protocol_here/$protocol/g" $DOCUMENT_ROOT/wp-config.php
 sudo perl -pi -e "s/url_here/$www$1/g" $DOCUMENT_ROOT/wp-config.php
 
@@ -391,14 +392,17 @@ fi
 cat > $DOCUMENT_ROOT/.htaccess <<HEREDOC
 # STOP APACHE FROM SERVING WP-CONFIG.PHP - [Added by $0]
 <files wp-config.php>
-	Order Deny,Allow
-	Deny from all
+	Require all denied
 </files>
 
 # STOP APACHE FROM SERVING .HT* FILES - [Added by $0]
 <Files ~ "^\.ht">
-	Order Deny,Allow
-	Deny from all
+	Require all denied
+</Files>
+
+# PROTECT .USER.INI - [Added by $0]
+<Files .user.ini>
+    Require all denied
 </Files>
 
 # BLOCK THE INCLUDE-ONLY FILES - [Added by $0]
@@ -471,7 +475,7 @@ else
     F=".htdbm"
 fi
 
-sudo cp -r /home/steve/templates/.htpasswds/$F $DIRECTORY/$F
+sudo cp -r /home/steve/.htpasswds/$F $DIRECTORY/$F
 #sudo chown $user:$group $DIRECTORY/$F
 sudo chmod $fperm $DIRECTORY/$F
 
@@ -479,7 +483,7 @@ sudo chown -R $owner:$group $DIRECTORY
 sudo find $DIRECTORY -type d -exec chmod g+s {} \;
 
 # Give user 'steve' full access to /var/www/$1.$TLD/ and all its files and sub-directories to allow correct use in ForkLift
-sudo setfacl -R -m user:steve:rwx $DIRECTORY
+#sudo setfacl -R -m user:steve:rwx $DIRECTORY
 
 # 8. PHP CONFIGURATION
 

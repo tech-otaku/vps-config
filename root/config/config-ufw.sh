@@ -14,7 +14,7 @@ ufw allow 80/tcp
 ufw allow 443/tcp
 
 # ssh
-ufw allow 7822/tcp
+ufw limit 7822/tcp comment 'Rate-limit connections'
 
 # webmin
 ufw allow 10000/tcp
