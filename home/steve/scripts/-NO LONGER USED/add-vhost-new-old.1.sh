@@ -23,7 +23,7 @@ fi
 
 DOMAIN="${1}"
 
-if [ -z "${2}"]; then
+if [ -z "${2}" ]; then
 	TLD="com"
 else 
 	TLD="${2}"
@@ -50,6 +50,7 @@ echo "Create Virtual Host Script for domain '${DOMAIN}.${TLD}'"
 echo "Installation directory: ${ROOT_DIR}/"
 echo "==================================================================="
 
+AUTH_USER="chiaki"
 case "${DOMAIN}.${TLD}" in
 	barrieward.com)
         POOL="apollo"
@@ -75,6 +76,7 @@ case "${DOMAIN}.${TLD}" in
         POOL="juno"
         WWW="Y"
         PROTECT="Y"
+        AUTH_USER="kiyoka"
         ;;
     demo.steveward.me.uk)
         POOL="mars"
@@ -100,6 +102,7 @@ case "${DOMAIN}.${TLD}" in
         POOL="saturn"
         WWW="Y"
         PROTECT="Y"
+        AUTH_USER="tomoka"
         ;;
     *)
 esac
@@ -181,7 +184,9 @@ CREATED=$(date "+%d/%m/%y at %H:%M:%S")
 sudo sed -i 's/EXAMPLE.COM/'"${DOMAIN}"'.'"${TLD}"'/g' "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"
 sudo sed -i 's/POOL/'"${POOL}"'/g' "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"
 sudo sed -i 's!# Created on!# Created on '"${CREATED}"' by '"$0"'!g' "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"		# The / separator replaced with ! in sed to avoid conflict with / in $CREATED date
-
+sudo sed -i 's!DOCUMENTROOT!'"${DOCUMENT_ROOT}"'!g' "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"
+sudo sed -i 's!ROOTDIRECTORY!'"${ROOT_DIR}"'!g' "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"
+sudo sed -i 's/AUTHUSER/'"${AUTH_USER}"'/g' "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"
 
 if [[ $PROTECT == "Y" ]]; then
 	touch "${ROOT_DIR}/.prevent-deletion"
@@ -191,23 +196,9 @@ fi
 # 7. CREATE .HTACCESS FILES, CONFIGURE HTTP AUTHENTICATION & OVERRIDE MASTER PHP SETTINGS
 
 # Enable .htaccess Overrides
-if grep -q "#AllowOverride All" "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"; then
-	sudo sed -i 's/#AllowOverride All/AllowOverride All/g' "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"
-fi
-
-tee "${DOCUMENT_ROOT}/.htaccess" <<HEREDOC
-# PROTECT INFO.PHP - [Added by $0]
-<Files info.php>
-	AuthType Basic
-	AuthName "Hackers are not welcome here!"
-	AuthGroupFile /dev/null
-	AuthBasicProvider dbm
-	AuthDBMUserFile $ROOT_DIR/.htdbm
-	Require user chiaki
-</Files>
-
-HEREDOC
-
+#if grep -q "#AllowOverride All" "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"; then
+#	sudo sed -i 's/#AllowOverride All/AllowOverride All/g' "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"
+#fi
 
 cp -r /home/steve/.htpasswds/.htdbm "${ROOT_DIR}/.htdbm"
 

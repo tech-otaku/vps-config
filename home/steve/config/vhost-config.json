@@ -1,0 +1,113 @@
+{
+	"defaults": {
+		"config_only":					"n",
+		"create_error": 				"n",
+		"create_info": 					"n",
+		"force_www":					"Y",
+		"group": 						"www-data",
+		"protect": 						"Y",
+		"protect_info":					"Y",
+		"ssl": 							"Y"
+	},
+	"domain": {
+		"barrieward.com": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"n",
+			"owner": 					"bazza",
+			"pool": 					"bazza",
+			"root_dir":					 "/home/bazza/www/barrieward.com",
+			"tld":						".com",
+			"www": 						"Y"
+        },
+        "actor.barrieward.com": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"n",
+			"owner": 					"bazza",
+			"pool": 					"bazza",
+			"root_dir":					 "/home/bazza/www/actor.barrieward.com",
+			"tld":						".com",
+			"www": 						"n"
+        },
+        "demo.barrieward.com": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"n",
+			"owner": 					"penny",
+			"pool": 					"penny",
+			"root_dir":					 "/home/penny/www/demo.barrieward.com",
+			"tld":						".com",
+			"www": 						"n"
+        },
+        "photography.barrieward.com": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"n",
+			"owner": 					"bazza",
+			"pool": 					"bazza",
+			"root_dir":					 "/home/bazza/www/photography.barrieward.com",
+			"tld":						".com",
+			"www": 						"n"
+        },
+        "patchpeters.com": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"Y",
+			"owner": 					"radon",
+			"pool": 					"radon",
+			"root_dir":					 "/home/radon/www/patchpeters.com",
+			"tld":						".com",
+			"www": 						"Y"
+        },
+        "demo.patchpeters.com": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"Y",
+			"owner": 					"radon",
+			"pool": 					"radon",
+			"root_dir":					 "/home/radon/www/demo.patchpeters.com",
+			"tld":						".com",
+			"www": 						"n"
+        },
+        "steveward.me.uk": {
+			"auth_user": 				"kiyoka",
+			"ignore_htaccess": 			"Y",
+			"owner": 					"argon",
+			"pool": 					"argon",
+			"root_dir":					 "/home/argon/www/steveward.me.uk",
+			"tld":						".me.uk",
+			"www": 						"Y"
+        },
+        "demo.steveward.me.uk": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"Y",
+			"owner": 					"argon",
+			"pool": 					"argon",
+			"root_dir":					 "/home/argon/www/demo.steveward.me.uk",
+			"tld":						".me.uk",
+			"www": 						"n"
+        },
+        "techotaku.com": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"Y",	
+			"owner": 					"boron",
+			"pool": 					"boron",
+			"root_dir":					 "/home/boron/www/techotaku.com",
+			"tld":						".com",
+			"www": 						"Y"
+        },
+        "tech-otaku.com": {
+			"auth_user": 				"tomoka",
+			"ignore_htaccess": 			"Y",
+			"owner": 					"xenon",
+			"pool": 					"xenon",
+			"root_dir":					 "/home/xenon/www/tech-otaku.com",
+			"tld":						".com",
+			"www": 						"Y"
+        },
+        "forms.tech-otaku.com": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"Y",
+			"owner": 					"xenon",
+			"pool": 					"xenon",
+			"root_dir":					 "/home/xenon/www/forms.tech-otaku.com",
+			"tld":						".com",
+			"www": 						"n"
+		}
+	}
+}
