@@ -108,6 +108,15 @@
 			"root_dir":					 "/home/xenon/www/forms.tech-otaku.com",
 			"tld":						".com",
 			"www": 						"n"
+		},
+		"tech-otaku.net": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"Y",
+			"owner": 					"krypton",
+			"pool": 					"krypton",
+			"root_dir":					 "/home/krypton/www/tech-otaku.net",
+			"tld":						".net",
+			"www": 						"Y"
 		}
 	}
 }
