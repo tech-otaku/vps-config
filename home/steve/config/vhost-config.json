@@ -64,6 +64,15 @@
 			"tld":						".com",
 			"www": 						"n"
         },
+        "html.patchpeters.com": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"Y",
+			"owner": 					"radon",
+			"pool": 					"radon",
+			"root_dir":					 "/home/radon/www/html.patchpeters.com",
+			"tld":						".com",
+			"www": 						"n"
+        },
         "steveward.me.uk": {
 			"auth_user": 				"kiyoka",
 			"ignore_htaccess": 			"Y",
