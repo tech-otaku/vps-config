@@ -10,10 +10,10 @@ sudo sed -i 's/($debian_chroot)}\\\[\\033\[01;32m\\\]\\u\@\\h/($debian_chroot)}\
 
 cat >> /root/.bashrc <<HEREDOC
 
-alias wp-install='bash /home/steve/scripts/install-wordpress.sh'
-alias wp-remove='bash /home/steve/scripts/remove-wordpress.sh'
-alias vhost-add='bash /home/steve/scripts/add-vhost.sh'
-alias vhost-del='bash /home/steve/scripts/delete-vhost.sh'
+#alias wp-install='bash /home/steve/scripts/install-wordpress.sh'
+#alias wp-remove='bash /home/steve/scripts/remove-wordpress.sh'
+#alias vhost-add='bash /home/steve/scripts/add-vhost.sh'
+#alias vhost-del='bash /home/steve/scripts/delete-vhost.sh'
 alias update='sudo -- sh -c "apt update; apt upgrade -y; apt dist-upgrade -y; apt autoremove -y; apt autoclean -y"'
 
 HEREDOC
@@ -27,12 +27,12 @@ sudo sed -i 's/($debian_chroot)}\\\[\\033\[01;32m\\\]\\u\@\\h/($debian_chroot)}\
 
 cat >> /home/steve/.bashrc <<HEREDOC
 
-alias wp-install='bash /home/steve/scripts/install-wordpress.sh'
-alias wp-remove='bash /home/steve/scripts/remove-wordpress.sh'
-alias vhost-add='bash /home/steve/scripts/add-vhost.sh'
-alias vhost-del='bash /home/steve/scripts/delete-vhost.sh'
+#alias wp-install='bash /home/steve/scripts/install-wordpress.sh'
+#alias wp-remove='bash /home/steve/scripts/remove-wordpress.sh'
+#alias vhost-add='bash /home/steve/scripts/add-vhost.sh'
+#alias vhost-del='bash /home/steve/scripts/delete-vhost.sh'
 alias update='sudo -- sh -c "apt update; apt upgrade -y; apt dist-upgrade -y; apt autoremove -y; apt autoclean -y"'
 
-export PATH=$PATH:/home/steve/scripts
+#export PATH=$PATH:/home/steve/scripts
 
 HEREDOC

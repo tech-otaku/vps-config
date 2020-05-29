@@ -13,7 +13,7 @@ if [ $r -eq 0 ]; then
     echo '--> Encrypting new user password.....'
     
     # Assign a temporary password - will be prompted to change at first login
-    pass=$(perl -e 'print crypt("steve", "9c");')
+    pass=$(perl -e 'print crypt("bornslippy","\$6\$UnXq642da9EfkQfH\$") . "\n"')
 
     echo '--> Adding new user.....'
     useradd -m -s /bin/bash -p "$pass" steve
@@ -24,8 +24,8 @@ if [ $r -eq 0 ]; then
     echo '--> Adding new user to sudoers.....'
     usermod -a -G sudo steve
     
-    echo '--> Adding new user to www-data.....'
-    usermod -a -G www-data steve
+    #echo '--> Adding new user to www-data.....'
+    #usermod -a -G www-data steve
     
     #echo '--> Making templates subdirectory.....'
     #mkdir /home/steve/templates
@@ -42,8 +42,9 @@ if [ $r -eq 0 ]; then
     #echo '--> Removing templates subdirectory for root.....'
     #rm -rf /root/config/templates
 
-    echo '--> Disabling root login in /etc/ssh/sshd_config.....'
-    sed -i '/prohibit-password/! s/#PermitRootLogin/PermitRootLogin/g' /etc/ssh/sshd_config; sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+    #echo '--> Disabling root login using password in /etc/ssh/sshd_config.....'
+    #sed -i 's/[#]*PermitRootLogin yes/PermitRootLogin prohibit-password/g' /etc/ssh/sshd_config
+    #sed -i '/prohibit-password/! s/#PermitRootLogin/PermitRootLogin/g' /etc/ssh/sshd_config; sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
 
     echo '--> Restarting ssh service.....'
     service ssh restart

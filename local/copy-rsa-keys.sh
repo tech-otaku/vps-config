@@ -37,10 +37,10 @@ if [ $? -eq 0 ]; then
 		sudo rm -rf "/Volumes/${computer}/.ssh/ids/$1"
 	fi
 	
-	ditto -rsrc /Users/steve/.ssh/ids/"$1" "/Volumes/${computer}/.ssh/ids/$1"
+	cp -R /Users/steve/.ssh/ids/"$1" "/Volumes/${computer}/.ssh/ids/$1"
 	echo "Updated /Volumes/${computer}/.ssh/ids/$1 ..."
 	
-	ditto -rsrc /Users/steve/.ssh/config "/Volumes/${computer}/.ssh/config"
+	cp  /Users/steve/.ssh/config "/Volumes/${computer}/.ssh/config"
 	echo "Updated /Volumes/${computer}/.ssh/ids/config ..."
 	
 	source ${__dir}/unmount-network-volume.sh "${computer}"
