@@ -56,7 +56,7 @@ if [ $? -ne 0 ]; then
 fi
 
 
-ROOT_DIR=$(cat /home/steve/config/vhost-config.json | python -c "import sys, json; print json.load(sys.stdin)['domain']['$DOMAIN.$TLD']['root_dir']")
+ROOT_DIR=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['domain']['$DOMAIN.$TLD']['root_dir'])")
 
 # # Exit if the domain's root directory doesn't exist.
 if [ ! -d "${ROOT_DIR}" ]; then
@@ -65,8 +65,8 @@ if [ ! -d "${ROOT_DIR}" ]; then
 fi
 
 DOCUMENT_ROOT=$ROOT_DIR/public_html
-GROUP=$(cat /home/steve/config/vhost-config.json | python -c "import sys, json; print json.load(sys.stdin)['defaults']['group']")
-OWNER=$(cat /home/steve/config/vhost-config.json | python -c "import sys, json; print json.load(sys.stdin)['domain']['$DOMAIN.$TLD']['owner']")
+GROUP=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['defaults']['group'])")
+OWNER=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['domain']['$DOMAIN.$TLD']['owner'])")
 
 #fperm=640	# All Files
 #dperm=750	# All directories
@@ -80,7 +80,7 @@ printf "${ROOT_DIR}\n"
 printf "${OWNER}\n"
 printf "${OWNER_CONF}\n"
 printf "${DOCUMENT_ROOT}\n"
-exit
+#exit
 
 
 #group=www-data

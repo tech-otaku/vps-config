@@ -13,7 +13,10 @@ if [ $r -eq 0 ]; then
     echo '--> Encrypting new user password.....'
     
     # Assign a temporary password - will be prompted to change at first login
-    pass=$(perl -e 'print crypt("bornslippy","\$6\$UnXq642da9EfkQfH\$") . "\n"')
+    #pass=$(perl -e 'print crypt("bornslippy","\$6\$UnXq642da9EfkQfH\$") . "\n"')
+    
+    # Assign a password 
+    pass=$(</root/config/.steve)
 
     echo '--> Adding new user.....'
     useradd -m -s /bin/bash -p "$pass" steve
@@ -46,8 +49,8 @@ if [ $r -eq 0 ]; then
     #sed -i 's/[#]*PermitRootLogin yes/PermitRootLogin prohibit-password/g' /etc/ssh/sshd_config
     #sed -i '/prohibit-password/! s/#PermitRootLogin/PermitRootLogin/g' /etc/ssh/sshd_config; sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
 
-    echo '--> Restarting ssh service.....'
-    service ssh restart
+    #echo '--> Restarting ssh service.....'
+    #service ssh restart
     
     echo '--> Copying vi configuration file.....'
     cp /root/config/.vimrc /root/.vimrc
@@ -55,7 +58,7 @@ if [ $r -eq 0 ]; then
 
     # Force password change for user steve at next (first) login
     # Source: http://www.cyberciti.biz/faq/rhel-debian-force-users-to-change-passwords/
-    chage -d 0 steve
+    #chage -d 0 steve
     
     echo '--> NEW USER CREATED.'
     

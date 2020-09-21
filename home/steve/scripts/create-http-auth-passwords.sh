@@ -1,45 +1,33 @@
 #!/bin/bash
-# Steve Ward: 2016-09-22
 
-# USAGE: bash /home/steve/templates/create-http-auth-passwords.sh <text|database>
+SOURCE=/home/steve/htdbm.source
+TARGET=/home/steve/.htpasswds
 
-FILEPATH="/home/steve/.htpasswds"
-
-if [ ! -d "$FILEPATH" ]
-then
-	mkdir "$FILEPATH"
+if [ ! -f $SOURCE ]; then
+	printf "ERROR: File '%s' doesn't exist. Run 'htdbm.sh' locally first.'" $SOURCE
+	exit 1
 fi
 
-if [ "$1" == text ]; then
-	COMMAND="htpasswd"
-elif [ "$1" == database ]; then
-	COMMAND="htdbm"
-else
-	echo "ERROR: No valid storage medium specified - 'text', 'database'"
-	exit -1
+if [ ! -d $TARGET ]; then
+	mkdir $TARGET
 fi
 
-echo "Creating $1 $FILEPATH/.$COMMAND"
+[ -f $TARGET/.htdbm ] && rm -f $TARGET/.htdbm
 
-USER="chiaki"
-echo "User '$USER'"
-$COMMAND -cm "$FILEPATH"/.$COMMAND $USER
+i=1
+cat /home/steve/htdbm.source | while read line
+do
+	if [[ $i -eq 1 ]]; then
+		OPTIONS=cmb
+	else
+		OPTIONS=mb
+	fi
+	
+	USERNAME=$(echo $line | cut -d',' -f1)
+	PASSWORD=$(echo $line | cut -d',' -f2)
+	htdbm -$OPTIONS $TARGET/.htdbm $USERNAME $PASSWORD
+	
+	((i=i+1))
+done
 
-USER="kiyoka"
-echo "User '$USER'"
-$COMMAND -m "$FILEPATH"/.$COMMAND $USER
-
-USER="michiyo"
-echo "User '$USER'"
-$COMMAND -m "$FILEPATH"/.$COMMAND $USER
-
-USER="miyuki"
-echo "User '$USER'"
-$COMMAND -m "$FILEPATH"/.$COMMAND $USER
-
-USER="tomoka"
-echo "User '$USER'"
-$COMMAND -m "$FILEPATH"/.$COMMAND $USER
-
-if [ -f "$FILEPATH"/.$COMMAND.pag ]; then mv "$FILEPATH"/.$COMMAND.pag "$FILEPATH"/.$COMMAND; fi
-if [ -f "$FILEPATH"/.$COMMAND.dir ]; then rm "$FILEPATH"/.$COMMAND.dir; fi
+rm -rf $SOURCE

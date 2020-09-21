@@ -15,7 +15,7 @@
 			"ignore_htaccess": 			"n",
 			"owner": 					"bazza",
 			"pool": 					"bazza",
-			"root_dir":					 "/home/bazza/www/barrieward.com",
+			"root_dir":					"/home/bazza/www/barrieward.com",
 			"tld":						".com",
 			"www": 						"Y"
         },
@@ -24,7 +24,7 @@
 			"ignore_htaccess": 			"n",
 			"owner": 					"bazza",
 			"pool": 					"bazza",
-			"root_dir":					 "/home/bazza/www/actor.barrieward.com",
+			"root_dir":					"/home/bazza/www/actor.barrieward.com",
 			"tld":						".com",
 			"www": 						"n"
         },
@@ -33,7 +33,7 @@
 			"ignore_htaccess": 			"n",
 			"owner": 					"penny",
 			"pool": 					"penny",
-			"root_dir":					 "/home/penny/www/demo.barrieward.com",
+			"root_dir":					"/home/penny/www/demo.barrieward.com",
 			"tld":						".com",
 			"www": 						"n"
         },
@@ -42,7 +42,7 @@
 			"ignore_htaccess": 			"n",
 			"owner": 					"bazza",
 			"pool": 					"bazza",
-			"root_dir":					 "/home/bazza/www/photography.barrieward.com",
+			"root_dir":					"/home/bazza/www/photography.barrieward.com",
 			"tld":						".com",
 			"www": 						"n"
         },
@@ -51,7 +51,7 @@
 			"ignore_htaccess": 			"Y",
 			"owner": 					"radon",
 			"pool": 					"radon",
-			"root_dir":					 "/home/radon/www/patchpeters.com",
+			"root_dir":					"/home/radon/www/patchpeters.com",
 			"tld":						".com",
 			"www": 						"Y"
         },
@@ -60,7 +60,7 @@
 			"ignore_htaccess": 			"Y",
 			"owner": 					"radon",
 			"pool": 					"radon",
-			"root_dir":					 "/home/radon/www/demo.patchpeters.com",
+			"root_dir":					"/home/radon/www/demo.patchpeters.com",
 			"tld":						".com",
 			"www": 						"n"
         },
@@ -69,16 +69,25 @@
 			"ignore_htaccess": 			"Y",
 			"owner": 					"radon",
 			"pool": 					"radon",
-			"root_dir":					 "/home/radon/www/html.patchpeters.com",
+			"root_dir":					"/home/radon/www/html.patchpeters.com",
 			"tld":						".com",
 			"www": 						"n"
+        },
+        "patchpeters.net": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"Y",
+			"owner": 					"cyton",
+			"pool": 					"cyton",
+			"root_dir":					"/home/cyton/www/patchpeters.net",
+			"tld":						".net",
+			"www": 						"Y"
         },
         "steveward.me.uk": {
 			"auth_user": 				"kiyoka",
 			"ignore_htaccess": 			"Y",
 			"owner": 					"argon",
 			"pool": 					"argon",
-			"root_dir":					 "/home/argon/www/steveward.me.uk",
+			"root_dir":					"/home/argon/www/steveward.me.uk",
 			"tld":						".me.uk",
 			"www": 						"Y"
         },
@@ -87,7 +96,7 @@
 			"ignore_htaccess": 			"Y",
 			"owner": 					"argon",
 			"pool": 					"argon",
-			"root_dir":					 "/home/argon/www/demo.steveward.me.uk",
+			"root_dir":					"/home/argon/www/demo.steveward.me.uk",
 			"tld":						".me.uk",
 			"www": 						"n"
         },
@@ -96,7 +105,7 @@
 			"ignore_htaccess": 			"Y",	
 			"owner": 					"boron",
 			"pool": 					"boron",
-			"root_dir":					 "/home/boron/www/techotaku.com",
+			"root_dir":					"/home/boron/www/techotaku.com",
 			"tld":						".com",
 			"www": 						"Y"
         },
@@ -105,7 +114,7 @@
 			"ignore_htaccess": 			"Y",
 			"owner": 					"xenon",
 			"pool": 					"xenon",
-			"root_dir":					 "/home/xenon/www/tech-otaku.com",
+			"root_dir":					"/home/xenon/www/tech-otaku.com",
 			"tld":						".com",
 			"www": 						"Y"
         },
@@ -114,16 +123,16 @@
 			"ignore_htaccess": 			"Y",
 			"owner": 					"xenon",
 			"pool": 					"xenon",
-			"root_dir":					 "/home/xenon/www/forms.tech-otaku.com",
+			"root_dir":					"/home/xenon/www/forms.tech-otaku.com",
 			"tld":						".com",
 			"www": 						"n"
 		},
 		"tech-otaku.net": {
 			"auth_user": 				"chiaki",
 			"ignore_htaccess": 			"Y",
-			"owner": 					"krypton",
-			"pool": 					"krypton",
-			"root_dir":					 "/home/krypton/www/tech-otaku.net",
+			"owner": 					"axion",
+			"pool": 					"axion",
+			"root_dir":					"/home/axion/www/tech-otaku.net",
 			"tld":						".net",
 			"www": 						"Y"
 		}
