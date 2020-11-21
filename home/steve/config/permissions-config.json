@@ -1,0 +1,42 @@
+{
+	"domain.tld": {
+		"owner":					    "root",
+		"group": 				        "www-data",
+		"permissions": 					"0750"
+	},
+	"public_html": {
+		"owner":					    "USER",
+		"group": 				        "www-data",
+		"permissions": 					"2750",
+		"files": {
+			"owner":					"USER",
+			"group": 				    "www-data",
+			"permissions": 				"0640"
+		},
+		"directories": {
+			"owner":					"USER",
+			"group": 				    "www-data",
+			"permissions": 				"0750"
+		}
+	},
+	".htdbm": {
+		"owner":					    "USER",
+		"group": 				        "www-data",
+		"permissions": 					"0440"
+	},
+	".prevent-deletion": {
+		"owner":					    "root",
+		"group": 				        "root",
+		"permissions": 					"0400"
+	},
+	"mysql-credentials.ini": {
+		"owner":					    "USER",
+		"group": 				        "www-data",
+		"permissions": 					"0640"
+	},
+	"wp-config": {
+		"owner":					    "USER",
+		"group": 				        "www-data",
+		"permissions": 					"0640"
+	}
+}

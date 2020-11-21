@@ -17,7 +17,8 @@
 			"pool": 					"bazza",
 			"root_dir":					"/home/bazza/www/barrieward.com",
 			"tld":						".com",
-			"www": 						"Y"
+			"www": 						"Y",
+			"cert_name":                "barrieward.com"
         },
         "actor.barrieward.com": {
 			"auth_user": 				"chiaki",
@@ -26,7 +27,8 @@
 			"pool": 					"bazza",
 			"root_dir":					"/home/bazza/www/actor.barrieward.com",
 			"tld":						".com",
-			"www": 						"n"
+			"www": 						"n",
+			"cert_name":                "barrieward.com"
         },
         "demo.barrieward.com": {
 			"auth_user": 				"chiaki",
@@ -35,7 +37,8 @@
 			"pool": 					"penny",
 			"root_dir":					"/home/penny/www/demo.barrieward.com",
 			"tld":						".com",
-			"www": 						"n"
+			"www": 						"n",
+			"cert_name":                "barrieward.com"
         },
         "photography.barrieward.com": {
 			"auth_user": 				"chiaki",
@@ -44,7 +47,8 @@
 			"pool": 					"bazza",
 			"root_dir":					"/home/bazza/www/photography.barrieward.com",
 			"tld":						".com",
-			"www": 						"n"
+			"www": 						"n",
+			"cert_name":                "barrieward.com"
         },
         "patchpeters.com": {
 			"auth_user": 				"chiaki",
@@ -53,7 +57,8 @@
 			"pool": 					"radon",
 			"root_dir":					"/home/radon/www/patchpeters.com",
 			"tld":						".com",
-			"www": 						"Y"
+			"www": 						"Y",
+			"cert_name":                "patchpeters.com"
         },
         "demo.patchpeters.com": {
 			"auth_user": 				"chiaki",
@@ -62,7 +67,8 @@
 			"pool": 					"radon",
 			"root_dir":					"/home/radon/www/demo.patchpeters.com",
 			"tld":						".com",
-			"www": 						"n"
+			"www": 						"n",
+			"cert_name":                "patchpeters.com"
         },
         "html.patchpeters.com": {
 			"auth_user": 				"chiaki",
@@ -71,7 +77,8 @@
 			"pool": 					"radon",
 			"root_dir":					"/home/radon/www/html.patchpeters.com",
 			"tld":						".com",
-			"www": 						"n"
+			"www": 						"n",
+			"cert_name":                "patchpeters.com"
         },
         "patchpeters.net": {
 			"auth_user": 				"chiaki",
@@ -80,7 +87,8 @@
 			"pool": 					"cyton",
 			"root_dir":					"/home/cyton/www/patchpeters.net",
 			"tld":						".net",
-			"www": 						"Y"
+			"www": 						"Y",
+			"cert_name":                "patchpeters.net"
         },
         "steveward.me.uk": {
 			"auth_user": 				"kiyoka",
@@ -89,7 +97,8 @@
 			"pool": 					"argon",
 			"root_dir":					"/home/argon/www/steveward.me.uk",
 			"tld":						".me.uk",
-			"www": 						"Y"
+			"www": 						"Y",
+			"cert_name":                "steveward.me.uk"
         },
         "demo.steveward.me.uk": {
 			"auth_user": 				"chiaki",
@@ -98,7 +107,8 @@
 			"pool": 					"argon",
 			"root_dir":					"/home/argon/www/demo.steveward.me.uk",
 			"tld":						".me.uk",
-			"www": 						"n"
+			"www": 						"n",
+			"cert_name":                "steveward.me.uk"
         },
         "techotaku.com": {
 			"auth_user": 				"chiaki",
@@ -107,7 +117,8 @@
 			"pool": 					"boron",
 			"root_dir":					"/home/boron/www/techotaku.com",
 			"tld":						".com",
-			"www": 						"Y"
+			"www": 						"Y",
+			"cert_name":                "techotaku.com"
         },
         "tech-otaku.com": {
 			"auth_user": 				"tomoka",
@@ -116,7 +127,8 @@
 			"pool": 					"xenon",
 			"root_dir":					"/home/xenon/www/tech-otaku.com",
 			"tld":						".com",
-			"www": 						"Y"
+			"www": 						"Y",
+			"cert_name":                "tech-otaku.com"
         },
         "forms.tech-otaku.com": {
 			"auth_user": 				"chiaki",
@@ -125,7 +137,8 @@
 			"pool": 					"xenon",
 			"root_dir":					"/home/xenon/www/forms.tech-otaku.com",
 			"tld":						".com",
-			"www": 						"n"
+			"www": 						"n",
+			"cert_name":                "tech-otaku.com"
 		},
 		"tech-otaku.net": {
 			"auth_user": 				"chiaki",
@@ -134,7 +147,8 @@
 			"pool": 					"axion",
 			"root_dir":					"/home/axion/www/tech-otaku.net",
 			"tld":						".net",
-			"www": 						"Y"
+			"www": 						"Y",
+			"cert_name":                "tech-otaku.net"
 		}
 	}
 }

@@ -20,7 +20,7 @@
 #                     |-*- mysql-credentials.ini	0640 user:www-data
 #                     |-*- wp-config.* 				0640 user:www-data
 
-clear
+#clear
 
 # Make sure root is running this script
 if [ $EUID -ne 0  ]; then

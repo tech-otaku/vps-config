@@ -88,6 +88,7 @@ OWNER=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json;
 POOL=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['domain']['$DOMAIN.$TLD']['pool'])")
 ROOT_DIR=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['domain']['$DOMAIN.$TLD']['root_dir'])")
 WWW=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['domain']['$DOMAIN.$TLD']['www'])")
+CERT_NAME=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['domain']['$DOMAIN.$TLD']['cert_name'])")
 
 DOCUMENT_ROOT=$ROOT_DIR/public_html
 
@@ -103,7 +104,7 @@ if [ ! -d "/home/${OWNER}/www" ]; then
 fi
 
 # Exit if PHP-FPM pool associated with the user doesn't exist.
-if [ ! -f "/etc/php/7.2/fpm/pool.d/${POOL}.conf" ]; then
+if [ ! -f "/etc/php/7.4/fpm/pool.d/${POOL}.conf" ]; then
 	printf "ERROR: The PHP-FPM pool '${POOL}' associated with the domain '$DOMAIN.$TLD' doesn't exist.\n"
 	exit 1
 fi
@@ -119,9 +120,13 @@ POOL="${input:-$POOL}"
 read -e -i "${SSL}" -p "> Configure for SSL (Y/n) ? " input
 SSL="${input:-$SSL}"
 
+if [[ $SSL == "Y" ]]; then
+	read -e -i "${CERT_NAME}" -p "> SSL Certificate to use: " input
+	CERT_NAME="${input:-$CERT_NAME}"
+fi
+
 read -e -i "${WWW}" -p "> Does this domain have a www prefix (Y/n) ? " input
 WWW="${input:-$WWW}"
-
 
 #FORCE="n"
 if [[ $WWW == "Y" ]]; then
@@ -168,6 +173,7 @@ printf "Root directory:                    ${ROOT_DIR}\n"
 printf "Document Root:                     ${DOCUMENT_ROOT}\n"
 printf "PHP-FPM Pool:                      ${POOL}\n"
 printf "Configure for SSL:                 " && [[ $SSL == 'Y' ]] && printf "Yes\n" || printf "No\n"
+[[ $SSL == "Y" ]] && printf "SSL Certificate Name:              %s\n" ${CERT_NAME} 
 printf "Has 'www' prefix:                  " && [[ $WWW == 'Y' ]] && printf "Yes\n" || printf "No\n"
 [[ $WWW == "Y" ]] && printf "Redirect non-www to 'www':         " && ( [[ $FORCE_WWW == 'Y' ]] && printf "Yes\n" || printf "No\n" )
 printf "Ignore '.htaccess' files:          " && [[ $IGNORE_HTACCESS == 'Y' ]] && printf "Yes\n" || printf "No\n"
@@ -277,6 +283,7 @@ sed -i 's/_POOL_/'"${POOL}"'/g' "/etc/apache2/sites-available/${DOMAIN}.${TLD}.c
 sed -i 's!_DOCUMENT_ROOT_!'"${DOCUMENT_ROOT}"'!g' "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"
 sed -i 's!_ROOT_DIRECTORY_!'"${ROOT_DIR}"'!g' "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"
 sed -i 's/_AUTH_USER_/'"${AUTH_USER}"'/g' "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"
+sed -i 's/_CERT_NAME_/'"${CERT_NAME}"'/g' "/etc/apache2/sites-available/${DOMAIN}.${TLD}.conf"
 
 
 # FOR DOMAIN TECHOTAKU.COM
