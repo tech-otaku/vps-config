@@ -25,9 +25,9 @@ IP="${input:-$IP}"
 
 TEMP_FILE=$(cat /dev/urandom | LC_ALL=C tr -dc "a-zA-Z0-9" | fold -w 24 | head -n 1)
 
-ssh -p 7822 steve@${IP} -N -f -M -S ~/.ssh/controlmasters/%r@%h
+ssh -p 7822 root@${IP} -N -f -M -S ~/.ssh/controlsockets/%r@%h:%p
 
-ssh -p 7822 root@${IP} -S ~/.ssh/controlmasters/%r@%h "bash -s" < /Users/steve/Developer/GitHub/vps-config/local/add-sftp-only-user-remote.sh "${@}" > "/tmp/${TEMP_FILE}.tmp" &
+ssh -p 7822 root@${IP} -S ~/.ssh/controlsockets/%r@%h:%p "bash -s" < /Users/steve/Developer/GitHub/vps-config/local/add-sftp-only-user-remote.sh "${@}" > "/tmp/${TEMP_FILE}.tmp" &
 
 wait
 
@@ -36,11 +36,12 @@ while read NAME; do
 	yes "y" | ssh-keygen -o -a 100 -t ed25519 -f /Users/steve/.ssh/ids/${IP}/${NAME}/id_ed25519 -N "" -C ${NAME}-$(date +"%Y%m%d%H%M%S-%Z" | awk '{print tolower($0)}')
 	[ ! -d ~/.ssh/ids/tech-otaku.com ] && mkdir ~/.ssh/ids/tech-otaku.com
 	cp -rp ~/.ssh/ids/${IP}/${NAME} ~/.ssh/ids/tech-otaku.com/${NAME}
-	cat ~/.ssh/ids/${IP}/${NAME}/id_ed25519.pub | ssh -p 7822 root@${IP} -S ~/.ssh/controlmasters/%r@%h "cat >> /home/${NAME}/.ssh/authorized_keys && chown ${NAME}:${NAME} /home/${NAME}/.ssh/authorized_keys && chmod 600 /home/${NAME}/.ssh/authorized_keys"
+	cat ~/.ssh/ids/${IP}/${NAME}/id_ed25519.pub | ssh -p 7822 root@${IP} -S ~/.ssh/controlsockets/%r@%h:%p "cat >> /home/${NAME}/.ssh/authorized_keys && chown ${NAME}:${NAME} /home/${NAME}/.ssh/authorized_keys && chmod 600 /home/${NAME}/.ssh/authorized_keys"
    	printf "User '${NAME}' has been created.\n"
 done < "/tmp/${TEMP_FILE}.tmp"
 
-ssh -O exit -S ~/.ssh/controlmasters/%r@%h ${IP}
+#ssh -O exit -S ~/.ssh/controlsockets/%r@%h ${IP}
+ssh -p 7822 root@${IP} -O exit -S ~/.ssh/controlsockets/%r@%h:%p
 
 rm "/tmp/${TEMP_FILE}.tmp"
 

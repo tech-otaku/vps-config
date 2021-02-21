@@ -14,9 +14,9 @@ IP="${input:-$IP}"
 
 TEMP_FILE=$(cat /dev/urandom | LC_ALL=C tr -dc "a-zA-Z0-9" | fold -w 24 | head -n 1)
 
-ssh -p 7822 steve@${IP} -N -f -M -S ~/.ssh/controlmasters/%r@%h
+ssh -p 7822 steve@${IP} -N -f -M -S ~/.ssh/controlsockets/%r@%h
 
-ssh -p 7822 root@${IP} -S ~/.ssh/controlmasters/%r@%h "bash -s" < /Users/steve/Developer/GitHub/vps-config/local/delete-sftp-only-user-remote.sh "${@}" > "/tmp/${TEMP_FILE}.tmp" &
+ssh -p 7822 root@${IP} -S ~/.ssh/controlsockets/%r@%h "bash -s" < /Users/steve/Developer/GitHub/vps-config/local/delete-sftp-only-user-remote.sh "${@}" > "/tmp/${TEMP_FILE}.tmp" &
 
 wait
 
@@ -25,7 +25,7 @@ while read LINE; do
 	printf "User '${LINE}' has been deleted.\n"
 done < "/tmp/${TEMP_FILE}.tmp"
 
-ssh -O exit -S ~/.ssh/controlmasters/%r@%h ${IP}
+ssh -O exit -S ~/.ssh/controlsockets/%r@%h ${IP}
 
 rm "/tmp/${TEMP_FILE}.tmp"
 

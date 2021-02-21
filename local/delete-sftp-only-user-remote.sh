@@ -1,7 +1,7 @@
 #!/bin/bash
 # Steve Ward: 2019-09-20
 
-# USAGE: ssh -p 7822 root@94.130.177.167 -S ~/.ssh/controlmasters/%r@%h "bash -s" < /Users/steve/Developer/GitHub/vps-config/local/delete-sftp-only-user-remote.sh "${@}" > "/tmp/${TEMP_FILE}.tmp" &
+# USAGE: ssh -p 7822 root@94.130.177.167 -S ~/.ssh/controlsockets/%r@%h "bash -s" < /Users/steve/Developer/GitHub/vps-config/local/delete-sftp-only-user-remote.sh "${@}" > "/tmp/${TEMP_FILE}.tmp" &
 
 if [ -z "${1}" ]; then
     echo "ERROR: No user name was specified."

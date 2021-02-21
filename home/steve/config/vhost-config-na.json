@@ -1,0 +1,54 @@
+{
+    "defaults": {
+        "config_only":                  "n",
+        "create_error":                 "n",
+        "create_info":                  "f",
+        "force_www":                    "Y",
+        "group":                        "www-data",
+        "protect":                      "n",
+        "protect_info":                 "n",
+        "ssl":                          "Y"
+    },
+    "domain": {
+        "patchpeters.com": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"n",
+			"owner": 					"radon",
+			"pool": 					"radon",
+			"root_dir":					"/home/radon/www/patchpeters.com",
+			"tld":						".com",
+			"www": 						"Y",
+			"cert_name":                "patchpeters.com"
+        },
+        "apache1.patchpeters.com": {
+            "auth_user":                "chiaki",
+            "ignore_htaccess":          "n",
+            "owner":                    "argon",
+            "pool":                     "argon",
+            "root_dir":                 "/home/argon/www/apache1.patchpeters.com",
+            "tld":                      ".com",
+            "www":                      "n",
+            "cert_name":                "apache1.patchpeters.com"
+        },
+        "apache2.patchpeters.com": {
+            "auth_user":                "chiaki",
+            "ignore_htaccess":          "n",
+            "owner":                    "axion",
+            "pool":                     "axion",
+            "root_dir":                 "/home/axion/www/apache2.patchpeters.com",
+            "tld":                      ".com",
+            "www":                      "n",
+            "cert_name":                "apache2.patchpeters.com"
+        },
+        "apache3.patchpeters.com": {
+            "auth_user":                "chiaki",
+            "ignore_htaccess":          "n",
+            "owner":                    "boron",
+            "pool":                     "boron",
+            "root_dir":                 "/home/boron/www/apache3.patchpeters.com",
+            "tld":                      ".com",
+            "www":                      "n",
+            "cert_name":                "apache3.patchpeters.com"
+        }
+    }
+}

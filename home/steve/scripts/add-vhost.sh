@@ -342,15 +342,19 @@ systemctl restart php"${PHP_VERSION}"-fpm
 #echo ""
 
 if [[ $SSL == "Y" ]]; then
-	echo ""
-	echo "WARNING: This virtual host has been configured to rewrite all requests to HTTPS."
-	echo "To avoid a redirect loop ensure ${DOMAIN}.${TLD} is paused – not active – on Cloudflare."
-	echo ""
+    cat << EOF
+    
+WARNING: This virtual host has been configured to rewrite all requests to HTTPS. To avoid a
+redirect loop ensure that if Cloudflare is enabled for the zone record (site) that includes
+${DOMAIN}.${TLD}, the SSL/TLS encryption mode is set to Full (strict)."
+See https://community.cloudflare.com/t/community-tip-fixing-err-too-many-redirects/42335
+EOF
 fi
 
 if [ ! -f "/etc/php/${PHP_VERSION}/fpm/pool.d/${POOL}.conf" ]; then
-	echo ""
-	echo "WARNING: The pool '/etc/php/${PHP_VERSION}/fpm/pool.d/${POOL}.conf' does not exist and needs"
-	echo "to be created in order for this virtual host to function correctly."
-	echo ""
+cat << EOF
+    
+WARNING: The pool '/etc/php/${PHP_VERSION}/fpm/pool.d/${POOL}.conf' does not exist and needs
+to be created in order for this virtual host to function correctly.
+EOF
 fi

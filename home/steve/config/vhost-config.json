@@ -18,7 +18,9 @@
 			"root_dir":					"/home/bazza/www/barrieward.com",
 			"tld":						".com",
 			"www": 						"Y",
-			"cert_name":                "barrieward.com"
+			"cert_name":                "barrieward.com",
+			"database":					"bazza",
+			"dbuser":					"apholera"
         },
         "actor.barrieward.com": {
 			"auth_user": 				"chiaki",
@@ -28,7 +30,9 @@
 			"root_dir":					"/home/bazza/www/actor.barrieward.com",
 			"tld":						".com",
 			"www": 						"n",
-			"cert_name":                "barrieward.com"
+			"cert_name":                "barrieward.com",
+			"database":					"bazza",
+			"dbuser":					"apholera"
         },
         "demo.barrieward.com": {
 			"auth_user": 				"chiaki",
@@ -48,7 +52,9 @@
 			"root_dir":					"/home/bazza/www/photography.barrieward.com",
 			"tld":						".com",
 			"www": 						"n",
-			"cert_name":                "barrieward.com"
+			"cert_name":                "barrieward.com",
+			"database":					"bazza",
+			"dbuser":					"apholera"
         },
         "patchpeters.com": {
 			"auth_user": 				"chiaki",
@@ -58,7 +64,9 @@
 			"root_dir":					"/home/radon/www/patchpeters.com",
 			"tld":						".com",
 			"www": 						"Y",
-			"cert_name":                "patchpeters.com"
+			"cert_name":                "patchpeters.com",
+			"database":					"patchpeters",
+			"dbuser":					"harry"
         },
         "demo.patchpeters.com": {
 			"auth_user": 				"chiaki",
@@ -68,7 +76,9 @@
 			"root_dir":					"/home/radon/www/demo.patchpeters.com",
 			"tld":						".com",
 			"www": 						"n",
-			"cert_name":                "patchpeters.com"
+			"cert_name":                "patchpeters.com",
+			"database":					"patchpeters",
+			"dbuser":					"harry"
         },
         "html.patchpeters.com": {
 			"auth_user": 				"chiaki",
@@ -78,7 +88,9 @@
 			"root_dir":					"/home/radon/www/html.patchpeters.com",
 			"tld":						".com",
 			"www": 						"n",
-			"cert_name":                "patchpeters.com"
+			"cert_name":                "patchpeters.com",
+			"database":					"patchpeters",
+			"dbuser":					"harry"
         },
         "patchpeters.net": {
 			"auth_user": 				"chiaki",
@@ -98,7 +110,9 @@
 			"root_dir":					"/home/argon/www/steveward.me.uk",
 			"tld":						".me.uk",
 			"www": 						"Y",
-			"cert_name":                "steveward.me.uk"
+			"cert_name":                "steveward.me.uk",
+			"database":					"steveward",
+			"dbuser":					"oliver"
         },
         "demo.steveward.me.uk": {
 			"auth_user": 				"chiaki",
@@ -112,7 +126,7 @@
         },
         "techotaku.com": {
 			"auth_user": 				"chiaki",
-			"ignore_htaccess": 			"Y",	
+			"ignore_htaccess": 			"Y",
 			"owner": 					"boron",
 			"pool": 					"boron",
 			"root_dir":					"/home/boron/www/techotaku.com",
@@ -128,8 +142,22 @@
 			"root_dir":					"/home/xenon/www/tech-otaku.com",
 			"tld":						".com",
 			"www": 						"Y",
-			"cert_name":                "tech-otaku.com"
+			"cert_name":                "tech-otaku.com",
+			"database":					"tech_otaku",
+			"dbuser":					"jake"
         },
+        "bits.tech-otaku.com": {
+			"auth_user": 				"miyuki",
+			"ignore_htaccess": 			"Y",
+			"owner": 					"xenon",
+			"pool": 					"xenon",
+			"root_dir":					"/home/xenon/www/bits.tech-otaku.com",
+			"tld":						".com",
+			"www": 						"n",
+			"cert_name":                "tech-otaku.com",
+			"database":					"bits",
+			"dbuser":					"daisy"
+		},
         "forms.tech-otaku.com": {
 			"auth_user": 				"chiaki",
 			"ignore_htaccess": 			"Y",
@@ -149,6 +177,26 @@
 			"tld":						".net",
 			"www": 						"Y",
 			"cert_name":                "tech-otaku.net"
+		},
+		"veward.com": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"Y",
+			"owner": 					"gluon",
+			"pool": 					"gluon",
+			"root_dir":					"/home/gluon/www/veward.com",
+			"tld":						".com",
+			"www": 						"Y",
+			"cert_name":                "veward.com"
+		},
+		"ste.veward.com": {
+			"auth_user": 				"chiaki",
+			"ignore_htaccess": 			"Y",
+			"owner": 					"gluon",
+			"pool": 					"gluon",
+			"root_dir":					"/home/gluon/www/ste.veward.com",
+			"tld":						".com",
+			"www": 						"n",
+			"cert_name":                "veward.com"
 		}
 	}
 }

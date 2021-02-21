@@ -14,8 +14,23 @@ if [ "$1" == "" ]; then
 	exit 1
 fi
 
-DIRECTORY="/var/www/$1"
-DOCUMENT_ROOT="$DIRECTORY/public_html"
+# Exit if the configuration file doesn't exist.
+if [ ! -f "/home/steve/config/vhost-config.json" ]; then
+	printf "ERROR: Can't find the configuration file '/home/steve/config/vhost-config.json'.\n"
+	exit 1
+fi
+
+# Exit if the configuration file doesn't contain configuration data for the domain.
+grep -q '"'$1'"' /home/steve/config/vhost-config.json
+if [ $? -ne 0 ]; then
+	printf "ERROR: No configuration data found for domain '$1'.\n"
+	exit 1
+fi
+
+#DIRECTORY="/var/www/$1"
+DIRECTORY=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['domain']['$1']['root_dir'])")
+#DOCUMENT_ROOT="$DIRECTORY/public_html"
+DOCUMENT_ROOT=$DIRECTORY/public_html
 
 # Check if directory for domain name exits - if not, exit.
 if [ ! -d "$DIRECTORY" ]; then
@@ -43,11 +58,19 @@ dperm=750	# All directories
 hperm=640	# .htacces, .htdbm, .htpasswds, .user.ini
 wperm=750	# wp-content directory and sub-directories
 xperm=640	# wp-config
-owner=`grep "AddHandler php7-fcgi-" /etc/apache2/sites-available/$1.conf | cut -d '-' -f 3 | cut -d ' ' -f1`
-group=www-data
+owner=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['domain']['$1']['owner'])")
+group=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['defaults']['group'])")
 
-read -e -p "> Database Name: " dbname
-read -e -p "> Database User: " dbuser
+#read -e -p "> Database Name: " dbname
+dbname=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['domain']['$1']['database'])")
+read -e -i "${dbname}" -p "> Database Name: " input
+dbname="${input:-$dbname}"
+
+#read -e -p "> Database User: " dbuser
+dbuser=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['domain']['$1']['dbuser'])")
+read -e -i "${dbuser}" -p "> Database User: " input
+dbuser="${input:-$dbuser}"
+
 read -s -p "> Database Password: " dbpass
 
 echo ""
@@ -96,17 +119,13 @@ hperm="${input:-$hperm}"
 read -e -i "$xperm" -p "> Set permissions on wp-config.php to ($xperm recommended): " input
 xperm="${input:-$xperm}"
 
-httpauth="tomoka"
+httpauth=$(cat /home/steve/config/vhost-config.json | python3 -c "import sys, json; print(json.load(sys.stdin)['domain']['$1']['auth_user'])")
 read -e -i "$httpauth" -p "> Set username for HTTP Auth [chiaki|kiyoka|miyuki|michiyo|tomoka] to: " input
 httpauth="${input:-$httpauth}"
 
 httpauthstorage="database"
 read -e -i "$httpauthstorage" -p "> Set password storage method for HTTP Auth [text|database] to: " input
 httpauthstorage="${input:-$httpauthstorage}"
-
-php_memory_limit="64M"
-read -e -i "$php_memory_limit" -p "> Set memory_limit in php.ini to ($php_memory_limit recommended): " input
-php_memory_limit="${input:-$php_memory_limit}"
 
 php_max_execution_time="180"
 read -e -i "$php_max_execution_time" -p "> Set max_execution_time in php.ini to ($php_max_execution_time recommended): " input
@@ -116,11 +135,15 @@ php_max_input_time="600"
 read -e -i "$php_max_input_time" -p "> Set max_input_time in php.ini to ($php_max_input_time recommended): " input
 php_max_input_time="${input:-$php_max_input_time}"
 
-php_post_max_size="128M"
+php_memory_limit="192M"
+read -e -i "$php_memory_limit" -p "> Set memory_limit in php.ini to ($php_memory_limit recommended): " input
+php_memory_limit="${input:-$php_memory_limit}"
+
+php_post_max_size="64M"
 read -e -i "$php_post_max_size" -p "> Set post_max_size in php.ini to ($php_post_max_size recommended): " input
 php_post_max_size="${input:-$php_post_max_size}"
 
-php_upload_max_filesize="256M"
+php_upload_max_filesize="32M"
 read -e -i "$php_upload_max_filesize" -p "> Set upload_max_filesize in php.ini to ($php_upload_max_filesize recommended): " input
 php_upload_max_filesize="${input:-$php_upload_max_filesize}"
 
@@ -157,9 +180,9 @@ echo "Set permissions on .htaccess/.user.ini to: $hperm"
 echo "Set permissions on wp-config.php to: $xperm"
 echo "Set username for HTTP Auth to: $httpauth"
 echo "Set password storage method for HTTP Auth to: $httpauthstorage"
-echo "Set memory_limit in php.ini to: $php_memory_limit"
 echo "Set max_execution_time in php.ini to: $php_max_execution_time"
 echo "Set max_input_time in php.ini to: $php_max_input_time"
+echo "Set memory_limit in php.ini to: $php_memory_limit"
 echo "Set post_max_size in php.ini to: $php_post_max_size"
 echo "Set upload_max_filesize in php.ini to: $php_upload_max_filesize"
 echo "Check for system updates before installing WordPress: $update"
@@ -390,15 +413,24 @@ fi
 
 cat > $DOCUMENT_ROOT/.user.ini <<HEREDOC
 ;[Added by $0]
-memory_limit = $php_memory_limit
+
+; This file is located in the '$DOCUMENT_ROOT/' directory.
+; A symbolic link to it exists in the '$DOCUMENT_ROOT/wp-admin/' directory.
+; See https://wordpress.stackexchange.com/q/380903/160533 for an explanantion.
+
 max_execution_time = $php_max_execution_time
 max_input_time = $php_max_input_time
+memory_limit = $php_memory_limit
 post_max_size = $php_post_max_size
 upload_max_filesize = $php_upload_max_filesize
 HEREDOC
 
-#sudo chown $user:$group $DOCUMENT_ROOT/.user.ini
+chown $user:$group $DOCUMENT_ROOT/.user.ini
 chmod $hperm $DOCUMENT_ROOT/.user.ini
+
+ln -s $DOCUMENT_ROOT/.user.ini $DOCUMENT_ROOT/wp-admin/.user.ini
+chown -h $user:$group $DOCUMENT_ROOT/wp-admin/.user.ini
+
 
 #if ! grep -q "# STOP APACHE FROM SERVING WP-CONFIG.PHP" $DOCUMENT_ROOT/.htaccess; then
 #cat >> $DOCUMENT_ROOT/.htaccess <<HEREDOC
@@ -438,6 +470,14 @@ sudo find $DIRECTORY -type d -exec chmod g+s {} \;
 #sudo perl -pi -e "s/^\s?(post_max_size)\s?=.*$/\1 = $php_post_max_size/g" /etc/php/7.0/apache2/php.ini
 #sudo perl -pi -e "s/^\s?(upload_max_filesize)\s?=.*$/\1 = $php_upload_max_filesize/g" /etc/php/7.0/apache2/php.ini
 
+TEMPLATES=/home/steve/templates
+sed -i "/### BEGIN GENERATED .HTACCESS DIRECTIVES \[DO NOT DELETE THIS LINE\]/,/### END GENERATED .HTACCESS DIRECTIVES \[DO NOT DELETE THIS LINE\]/ { /### BEGIN GENERATED .HTACCESS DIRECTIVES \[DO NOT DELETE THIS LINE\]/{p; r ${TEMPLATES}/htaccess/wp-htaccess.conf
+}; /### END GENERATED .HTACCESS DIRECTIVES \[DO NOT DELETE THIS LINE\]/p; d }"  "/etc/apache2/sites-available/${1}.conf"
+
+sed -i 's!_TEMPLATE_DIRECTORY_!'"${TEMPLATES}"'!g' "/etc/apache2/sites-available/${1}.conf"
+sed -i 's!_DOCUMENT_ROOT_!'"${DOCUMENT_ROOT}"'!g' "/etc/apache2/sites-available/${1}.conf"
+sed -i 's!_ROOT_DIRECTORY_!'"${DIRECTORY}"'!g' "/etc/apache2/sites-available/${1}.conf"
+sed -i 's/_AUTH_USER_/'"${httpauth}"'/g' "/etc/apache2/sites-available/${1}.conf"
 
 # 9. ENABLE APACHE MODULES
 
